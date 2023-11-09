@@ -1,0 +1,131 @@
+
+Q1. What is Abstraction in OOps? Explain with an example.
+Ans -> it provide the simplyifed and essential representation of complex systems it involues the hiding the unnessery data
+
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def draw(self):
+        pass
+
+class Circle(Shape):
+    def draw(self):
+        print("Drawing a circle")
+
+class Rectangle(Shape):
+    def draw(self):
+        print("Drawing a rectangle")
+
+shapes = [Circle(), Rectangle()]
+
+for shape in shapes:
+    shape.draw()
+Drawing a circle
+Drawing a rectangle
+Q2. Differentiate between Abstraction and Encapsulation. Explain with an example.
+Abstraction and encapsulation are two fundamental concepts in object-oriented programming, but they serve different purposes.
+
+Abstraction: Abstraction focuses on providing a simplified and essential representation of complex systems by hiding unnecessary details and exposing only relevant information. It allows you to create abstract classes or interfaces that define a blueprint for the derived classes to implement. Abstraction emphasizes "what" an object does rather than "how" it does it.
+
+Example: Let's consider the concept of a "Vehicle" in a transportation system. The Vehicle class can be an abstract class that defines common properties and behaviors of vehicles, such as "start_engine()", "stop_engine()", and "move()". These methods represent the essential actions that any vehicle can perform. The Vehicle class serves as an abstraction of a generic vehicle, without specifying the implementation details of individual vehicle types like cars, bicycles, or airplanes.
+
+Encapsulation: Encapsulation refers to the bundling of data and methods into a single unit, known as a class. It hides the internal workings and state of an object from external access, and provides controlled access through methods or properties. Encapsulation helps in achieving data abstraction, data integrity, and modularity.
+
+Example: Consider a class called "BankAccount" that represents a customer's bank account. The BankAccount class can have private data members like "account_number" and "balance". It also includes methods like "deposit()" and "withdraw()" to modify the balance. These data members are encapsulated within the class, and external code cannot directly access or modify them. Instead, they can interact with the account using the provided methods, ensuring that the account's data is accessed and modified in a controlled manner.
+
+Difference between Abstraction and Encapsulation:
+
+Abstraction is concerned with creating a simplified view of a complex system, focusing on what an object does, while encapsulation is concerned with bundling data and methods together, hiding the internal details of an object.
+Abstraction involves defining abstract classes or interfaces that provide a blueprint for derived classes to implement, whereas encapsulation involves wrapping data and methods into a single unit (class) and controlling access to them.
+Abstraction is about defining a higher level of abstraction and working with objects based on their essential behaviors, while encapsulation provides data protection and ensures that the internal state of an object remains consistent and controlled.
+In summary, abstraction provides a simplified view of a complex system, focusing on essential behaviors, while encapsulation bundles data and methods into a class, hiding internal details and providing controlled access to the object's state and behavior. Both concepts contribute to building well-structured and maintainable object-oriented programs.
+
+Q3. What is abc module in python? Why is it used?
+Ans -> ABC Stand for the "Abstract Base Classes." it provide the mechanism for defining abstract base classees in python it is classes that cannot be instantiated and serve as blueprint for other classes
+
+The abc module is used for creating abstract base classes and enforcing a certain interface or a set of methods that derived classes must implement. It allows you to define abstract methods, which are methods without any implementation, and abstract properties that must be implemented by the derived classes. Any class that inherits from an abstract base class is required to implement all the abstract methods defined in the base class.
+
+The main purpose of using abstract base classes is to provide a common interface and ensure a certain level of consistency and structure across multiple classes. They help in establishing a contract between the base class and its derived classes, specifying the methods and properties that must be implemented.
+
+The abc module provides the ABC class, which is a metaclass for defining abstract base classes, and the abstractmethod decorator for marking methods as abstract. By inheriting from ABC and using the abstractmethod decorator, you can define abstract methods in your abstract base class.
+
+Here's a simple example that demonstrates the usage of the abc module:
+
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return 3.14 * self.radius * self.radius
+
+class Rectangle(Shape):
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+
+# Attempting to instantiate the abstract base class will raise an error
+# shape = Shape()  # This will raise a TypeError
+
+circle = Circle(5)
+print(circle.area())  # Output: 78.5
+
+rectangle = Rectangle(4, 6)
+print(rectangle.area())  # Output: 24
+78.5
+24
+Q4. How can we achieve data abstraction?
+Data abstraction in programming refers to the concept of hiding the internal details or implementation of data structures and providing only essential information and operations to the users. It allows users to interact with the data using a simplified and well-defined interface, without needing to know the underlying complexities.
+
+In object-oriented programming, data abstraction can be achieved through the following techniques:
+
+Encapsulation: Encapsulation is the process of bundling data and methods that operate on that data into a single unit, known as a class. By encapsulating the data within a class, you can control access to it and ensure that it is accessed and modified through well-defined methods or properties. This way, the internal representation of data remains hidden, providing an abstraction to the users.
+
+Access Modifiers: Access modifiers like public, private, and protected can be used to control the visibility and accessibility of data members and methods in a class. By making certain data members private, you restrict direct access to them from outside the class. Instead, you provide public methods or properties to interact with and manipulate the data, allowing you to enforce abstraction and maintain data integrity.
+
+Getter and Setter Methods: Getter and setter methods, also known as accessors and mutators, respectively, can be used to retrieve and modify the values of private data members. By providing controlled access to the data through these methods, you can enforce abstraction and define the rules and constraints for accessing and modifying the data.
+
+Abstract Classes and Interfaces: Abstract classes and interfaces provide a higher level of abstraction by defining a common interface or blueprint for derived classes. They allow you to specify a set of methods that derived classes must implement, without providing any concrete implementation in the abstract class or interface itself. This allows you to work with objects based on their common interface, without worrying about the specific details of their implementation.
+
+By utilizing these techniques, you can achieve data abstraction in your programs. It helps in managing complexity, promoting modularity, and providing a simplified and well-defined way to interact with the data, shielding the users from unnecessary implementation details.
+
+Q5. Can we create an instance of an abstract class? Explain your answer.
+No, we cannot create an instance of an abstract class in Python. Abstract classes are designed to serve as blueprints or templates for other classes to inherit from, and they cannot be instantiated directly.
+
+Attempting to create an instance of an abstract class will result in a TypeError being raised. This is because abstract classes typically contain one or more abstract methods, which are methods without any implementation. These methods must be overridden and implemented in the derived classes.
+
+The purpose of abstract classes is to define a common interface and provide a structure for derived classes to follow. They encapsulate common behaviors and attributes that are shared among multiple related classes. By defining abstract methods, the abstract class ensures that all derived classes implement those methods, enforcing a certain contract or behavior.
+
+To use an abstract class, you need to create a derived class that inherits from the abstract class and provides implementations for all the abstract methods. This derived class can then be instantiated and used.
+
+Here's an example to illustrate the concept:
+
+from abc import ABC, abstractmethod
+
+class AbstractClass(ABC):
+    @abstractmethod
+    def abstract_method(self):
+        pass
+
+class ConcreteClass(AbstractClass):
+    def abstract_method(self):
+        print("Implementation of abstract_method")
+
+# Attempting to create an instance of the abstract class will raise a TypeError
+# abstract_obj = AbstractClass()  # This will raise a TypeError
+
+concrete_obj = ConcreteClass()
+concrete_obj.abstract_method()  # Output: "Implementation of abstract_method"
+In this example, AbstractClass is an abstract class with an abstract method abstract_method(). The ConcreteClass inherits from AbstractClass and provides an implementation for the abstract method. An instance of ConcreteClass can be created and used to call the overridden abstract_method().
+
+In summary, abstract classes cannot be instantiated directly, as they are intended to be inherited from and serve as a blueprint for derived classes. The derived classes must implement all the abstract methods defined in the abstract class, and it is these derived classes that can be instantiated and used in the program.
